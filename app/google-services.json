@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "768120331524",
+    "firebase_url": "https://pacexchange-1527c.firebaseio.com",
+    "project_id": "pacexchange-1527c",
+    "storage_bucket": "pacexchange-1527c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:768120331524:android:3c7fce00f347f96f",
+        "android_client_info": {
+          "package_name": "com.cs639.pacexchange"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "768120331524-nrsb37ervgmnefjan45r4tfgojr1diam.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cs639.pacexchange",
+            "certificate_hash": "63dd9672a84be418ea21ae70c3c7675e410e907f"
+          }
+        },
+        {
+          "client_id": "768120331524-gf689r7het37rblec19ni28769l17dn1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBx8-ZxHRROP1GymHB5OufcIDLIEskVHuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "768120331524-gf689r7het37rblec19ni28769l17dn1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

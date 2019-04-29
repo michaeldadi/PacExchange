@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">PacExchange</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_profile">Profile</string>
+
+    <string name="edit_profile_button_content_description">Edit Profile</string>
+    <string name="profile_picture_content_description">User Profile Picture</string>
+
+    <string name="graduation_year">Class of %s</string>
+    <string name="reputation">%s Reputation Points</string>
+
+    <string name="profile">Profile</string>
+    <string name="inventory">Inventory</string>
+    <string name="shop">Items for Sale</string>
+    <string name="seller">Seller</string>
+    <string name="item_type">Item Type</string>
+    <string name="price">Price</string>
+
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="signup_link">No account yet? Create one</string>
+    <string name="login_button">Login</string>
+    <string name="name_hint">Name</string>
+    <string name="create_account_button">Create Account</string>
+    <string name="login_link">Already a member? Login</string>
+    <string name="phone_number_hint">Phone Number</string>
+    <string name="grad_year_hint">Graduation Year</string>
+    <string name="grad_year">Class of %d</string>
+    <string name="sales_label">Sales</string>
+    <string name="reputation_label">Reputation</string>
+    <string name="items_label">Items</string>
+    <string name="forgot_password_link">Forgot your password?</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="back">Back</string>
+    <string name="enter_registered_email">Please enter your registered email below:</string>
+    <string name="label_forgot_password">Forgot Password?</string>
+    <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
+    <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
+    <string name="register_button">Register</string>
+</resources>

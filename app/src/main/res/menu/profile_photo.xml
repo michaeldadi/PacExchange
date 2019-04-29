@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/open_camera"
+        android:title="Take Photo"/>
+
+    <item
+        android:id="@+id/open_gallery"
+        android:title="Choose from Gallery"/>
+
+    <item
+        android:id="@+id/remove_photo"
+        android:title="Remove Current Photo"/>
+</menu>
