@@ -13,14 +13,14 @@ import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.support.annotation.ColorInt;
-import android.support.annotation.Dimension;
-import android.support.annotation.DrawableRes;
-import android.support.annotation.Nullable;
+import androidx.annotation.ColorInt;
+import androidx.annotation.Dimension;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.Nullable;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-public class CircularImageView extends android.support.v7.widget.AppCompatImageView {
+public class CircularImageView extends androidx.appcompat.widget.AppCompatImageView {
     private static final int DEF_PRESS_HIGHLIGHT_COLOR = 0x32000000;
 
     private Shader mBitmapShader;

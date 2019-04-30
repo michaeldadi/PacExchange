@@ -7,17 +7,16 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.Nullable;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.Toast;
 
@@ -34,10 +33,10 @@ import java.io.IOException;
 
 import static android.app.Activity.RESULT_OK;
 
-public class SettingsFragment extends Fragment {
+public class EditUserProfileFragment extends Fragment {
 
-    ImageView mProfilePicture;
-    ImageButton mSaveChanges;
+    CircularImageView mProfilePicture;
+    ImageButton mSaveChanges, mDiscardChanges;
     FloatingActionButton changeProfilePhotoButton;
     EditText mName, mEmail, mGradYear, mPhoneNumber;
 
@@ -46,16 +45,17 @@ public class SettingsFragment extends Fragment {
     FirebaseUser user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
-    public SettingsFragment() {
+    public EditUserProfileFragment() {
         //Required empty public constructor
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.edit_user_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_user_profile, container, false);
         //Initialize UI elements
         mSaveChanges = view.findViewById(R.id.save_changes_button);
+        mDiscardChanges = view.findViewById(R.id.discard_changes_button);
         changeProfilePhotoButton = view.findViewById(R.id.floatingActionButton);
         mProfilePicture = view.findViewById(R.id.imageview_account_profile);
         mName = view.findViewById(R.id.edit_change_name);
@@ -90,15 +90,17 @@ public class SettingsFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        mStorageRef = FirebaseStorage.getInstance().getReference();
         addButtonClickListeners();
 
     }
 
     private void addButtonClickListeners() {
         mSaveChanges.setOnClickListener(v -> {
+            user.updateEmail(mEmail.getText().toString());
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserProfileFragment()).commit();
+
         }); //Open popup menu on floating action button click with options for profile image
+        mDiscardChanges.setOnClickListener(v -> getFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserProfileFragment()).commit());
         changeProfilePhotoButton.setOnClickListener(v -> {
             PopupMenu popupMenu = new PopupMenu(getContext(), v);
             MenuInflater inflater = popupMenu.getMenuInflater();

@@ -2,8 +2,8 @@ package com.cs639.pacexchange;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +39,7 @@ public class UserProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_profile, container, false);
         //Initialize UI elements
-        mSettingsDropDown = view.findViewById(R.id.settings);
+        mSettingsDropDown = view.findViewById(R.id.edit);
         mName = view.findViewById(R.id.user_name);
         mEmail = view.findViewById(R.id.user_email);
         mGradYear = view.findViewById(R.id.user_grad_year);
@@ -79,6 +79,6 @@ public class UserProfileFragment extends Fragment {
 
     private void addButtonClickListeners() {
         mSettingsDropDown.setOnClickListener(v ->
-                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new SettingsFragment()).commit());
+                getFragmentManager().beginTransaction().replace(R.id.fragment_container, new EditUserProfileFragment()).commit());
     }
 }

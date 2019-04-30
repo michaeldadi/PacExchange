@@ -1,8 +1,11 @@
 package com.cs639.pacexchange;
 
 import android.content.Intent;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,12 +17,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Set home page as initial view
-        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container,new ItemFragment()).commit();
+        getSupportFragmentManager().beginTransaction().add(R.id.fragment_container, new ItemFragment()).commit();
         //On event tab is switched
         onTabSwitch();
+        //TODO: Not working...always detecting user
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         //Open login on application launch
-        Intent intent = new Intent(this, LoginActivity.class);
-        startActivity(intent);
+        if (user == null) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override
@@ -34,11 +41,16 @@ public class MainActivity extends AppCompatActivity {
         // Handle action bar item clicks here. The action bar will
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        if (id == R.id.action_settings)
+        if (item.getItemId() == R.id.action_settings) {
+            Intent intent = new Intent(this, SettingsActivity.class);
+            startActivity(intent);
             return true;
-
+        }
+        else if (item.getItemId() == R.id.action_log_out) {
+            FirebaseAuth.getInstance().signOut();
+            Intent intent = new Intent(this, LoginActivity.class);
+            startActivity(intent);
+        }
         return super.onOptionsItemSelected(item);
     }
 
