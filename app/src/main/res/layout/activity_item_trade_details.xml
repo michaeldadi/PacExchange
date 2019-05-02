@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/activity_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:text="@string/seller_info"
+        android:textSize="30sp" />
+
+    <TextView
+        android:id="@+id/seller_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_title"
+        android:layout_margin="10dp"
+        android:text="@string/seller_colon"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/seller_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/activity_title"
+        android:layout_toEndOf="@id/seller_text"
+        android:textSize="24sp"
+        android:text="@string/place_holder"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/item_type_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seller_text"
+        android:layout_margin="10dp"
+        android:text="@string/item_type_colon"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/item_type_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/seller_name"
+        android:layout_toEndOf="@id/item_type_text"
+        android:textSize="24sp"
+        android:text="@string/place_holder"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+
+    <TextView
+        android:id="@+id/estimated_value_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_type_text"
+        android:layout_margin="10dp"
+        android:text="@string/estimated_value"
+        android:textSize="24sp" />
+
+    <TextView
+        android:id="@+id/estimated_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/estimated_value_text"
+        android:layout_below="@id/item_type_name"
+        android:textSize="24sp"
+        android:text="@string/place_holder"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true">
+        <Button
+            android:id="@+id/back_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:text="@string/back_button"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/propose_trade_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/propose_trade"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
