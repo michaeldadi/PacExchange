@@ -1,23 +1,21 @@
 package com.cs639.pacexchange;
 
-import android.content.Context;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.cs639.pacexchange.dummy.DummyContent;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryFragment extends Fragment {
 
-    // TODO: Customize parameter argument names
-    private static final String ARG_COLUMN_COUNT = "column-count";
-    // TODO: Customize parameters
-    private int mColumnCount = 1;
+    private List<Inventory> inventoryList = new ArrayList<>();
+    private MyInventoryRecyclerViewAdapter mAdapter;
 
     public InventoryFragment() {
     }
@@ -25,10 +23,6 @@ public class InventoryFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        if (getArguments() != null) {
-            mColumnCount = getArguments().getInt(ARG_COLUMN_COUNT);
-        }
     }
 
     @Override
@@ -36,17 +30,52 @@ public class InventoryFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_inventory_list, container, false);
 
-        // Set the adapter
-        if (view instanceof RecyclerView) {
-            Context context = view.getContext();
-            RecyclerView recyclerView = (RecyclerView) view;
-            if (mColumnCount <= 1) {
-                recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            } else {
-                recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
-            }
-            recyclerView.setAdapter(new MyInventoryRecyclerViewAdapter(DummyContent.ITEMS));
-        }
+            RecyclerView recyclerView = view.findViewById(R.id.inventory_list);
+            mAdapter = new MyInventoryRecyclerViewAdapter(getContext(), inventoryList);
+            RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+            recyclerView.setLayoutManager(mLayoutManager);
+            recyclerView.setAdapter(mAdapter);
+
+            prepareAlbums();
         return view;
     }
+
+    private void prepareAlbums() {
+
+        Inventory a = new Inventory("Books", 13, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Tutoring", 8, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Water bottles", 11, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Food", 12, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Honeymoon", 14, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("I Need a Doctor", 1, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Loud", 11, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Legend", 14, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Hello", 11, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        a = new Inventory("Greatest Hits", 17, R.drawable.user_placeholder);
+        inventoryList.add(a);
+
+        mAdapter.notifyDataSetChanged();
+    }
+
 }

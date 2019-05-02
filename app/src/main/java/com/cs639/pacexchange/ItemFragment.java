@@ -18,7 +18,7 @@ public class ItemFragment extends Fragment {
 
     RecyclerView mRecyclerView;
     Context mContext;
-    List<ListData> mListData;
+    List<Item> mListData;
 
     @Override
     public void onAttach(Context context) {
@@ -30,18 +30,18 @@ public class ItemFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mListData = new ArrayList<>();
-        mListData.add(new ListData("John Doe", "tickets", 5));
-        mListData.add(new ListData("Sebastian Dabrowski", "tutoring", 3));
-        mListData.add(new ListData("Alexandra Stephens", "meal plan money", 2));
-        mListData.add(new ListData("Jacob Oiler", "chair", 7));
-        mListData.add(new ListData("Tinna Rider", "charger", 4));
-        mListData.add(new ListData("Tim Fargoe", "pencils", 1));
-        mListData.add(new ListData("Patryck Steward", "textbook", 5));
-        mListData.add(new ListData("Anna White", "cupcakes", 2));
-        mListData.add(new ListData("Jaden Williams", "tickets", 4));
-        mListData.add(new ListData("Jaden Williams", "tickets", 4));
-        mListData.add(new ListData("Jaden Williams", "tickets", 4));
-        mListData.add(new ListData("Jaden Williams", "tickets", 4));
+        mListData.add(new Item("John Doe", "tickets", 5));
+        mListData.add(new Item("Sebastian Dabrowski", "tutoring", 3));
+        mListData.add(new Item("Alexandra Stephens", "meal plan money", 2));
+        mListData.add(new Item("Jacob Oiler", "chair", 7));
+        mListData.add(new Item("Tinna Rider", "charger", 4));
+        mListData.add(new Item("Tim Fargoe", "pencils", 1));
+        mListData.add(new Item("Patryck Steward", "textbook", 5));
+        mListData.add(new Item("Anna White", "cupcakes", 2));
+        mListData.add(new Item("Jaden Williams", "tickets", 4));
+        mListData.add(new Item("Jaden Williams", "tickets", 4));
+        mListData.add(new Item("Jaden Williams", "tickets", 4));
+        mListData.add(new Item("Jaden Williams", "tickets", 4));
 
     }
 
@@ -50,7 +50,7 @@ public class ItemFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_item_list, container, false);
 
-        mRecyclerView = view.findViewById(R.id.list);
+        mRecyclerView = view.findViewById(R.id.item_list);
 
 
 
@@ -61,13 +61,8 @@ public class ItemFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(mContext, mListData, new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSellingRowClicked(v);
-            }
-        });
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(mContext, mListData, v -> onSellingRowClicked(v));
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
         mRecyclerView.setAdapter(adapter);
     }
 

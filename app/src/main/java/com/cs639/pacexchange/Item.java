@@ -1,11 +1,11 @@
 package com.cs639.pacexchange;
 
-public class ListData {
+public class Item {
     int mPrice;
     String mSeller;
     String mItemType;
 
-    public ListData(String seller, String itemType, int price)
+    public Item(String seller, String itemType, int price)
     {
         mSeller = seller;
         mItemType = itemType;

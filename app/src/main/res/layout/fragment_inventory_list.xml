@@ -1,13 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/list"
+    android:orientation="vertical">
+<SearchView android:layout_height="wrap_content" android:layout_width="match_parent"
+    android:id="@+id/search_inventory"
+    android:clickable="true"
+    android:iconifiedByDefault="false"
+    android:queryHint="Search Your Inventory"/>
+
+<androidx.recyclerview.widget.RecyclerView xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/inventory_list"
     android:name="com.cs639.pacexchange.InventoryFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
-    app:layoutManager="LinearLayoutManager"
     tools:context=".InventoryFragment"
     tools:listitem="@layout/fragment_inventory" />
+
+</LinearLayout>

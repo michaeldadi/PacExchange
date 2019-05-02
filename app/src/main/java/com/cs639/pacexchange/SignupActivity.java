@@ -86,7 +86,7 @@ public class SignupActivity extends AppCompatActivity {
                     users.put("email", inputEmail.getText().toString());
                     users.put("phone", inputPhone.getText().toString());
                     users.put("year", Integer.parseInt(inputYear.getText().toString()));
-                    db.collection("users").add(users);
+                    db.collection("users").document(user.getUid()).set(users);
 
                     startActivity(new Intent(this, MainActivity.class));
                     finish();

@@ -74,7 +74,7 @@ public class EditUserProfileFragment extends Fragment {
 
         mStorageRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> Picasso.get().load(uri).into(mProfilePicture));
         //Set user profile grad year and phone #
-        DocumentReference docRef = db.collection("users").document("1gdhE2ezd6IyH1RgyaLU");
+        DocumentReference docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 DocumentSnapshot document = task.getResult();

@@ -13,10 +13,10 @@ import java.util.List;
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
     Context mContext;
-    List<ListData> mListData;
+    List<Item> mListData;
     View.OnClickListener mRowClickListener;
 
-    public MyItemRecyclerViewAdapter(Context context, List<ListData> listData, View.OnClickListener rowClickListener)
+    public MyItemRecyclerViewAdapter(Context context, List<Item> listData, View.OnClickListener rowClickListener)
     {
         mContext = context;
         mListData = listData;
@@ -36,14 +36,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public void onBindViewHolder(@NonNull ViewHolder viewHolder, int i) {
         ViewHolder recyclerViewHolder = viewHolder;
 
-        ListData data = getItem(i);
+        Item data = getItem(i);
         recyclerViewHolder.mSellerView.setText(data.getSeller());
         recyclerViewHolder.mItemTypeView.setText(data.getItemType());
         recyclerViewHolder.mPriceView.setText(data.getPrice() + "");
         recyclerViewHolder.itemView.setTag(i);
     }
 
-    public ListData getItem(int position)
+    public Item getItem(int position)
     {
         return mListData.get(position);
     }
