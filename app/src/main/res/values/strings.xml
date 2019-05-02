@@ -40,4 +40,11 @@
     <string name="auth_failed">Authentication failed, check your email and password or sign up</string>
     <string name="minimum_password">Password too short, enter minimum 6 characters!</string>
     <string name="register_button">Register</string>
+    <string name="seller_info">Seller Information</string>
+    <string name="seller_colon">Seller:</string>
+    <string name="item_type_colon">Item Type:</string>
+    <string name="estimated_value">Estimated value:</string>
+    <string name="place_holder">Placeholder</string>
+    <string name="propose_trade">Propose Trade</string>
+    <string name="back_button">Return to Offer List</string>
 </resources>
