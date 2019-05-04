@@ -68,4 +68,24 @@
     <string name="attachment_summary_on">Automatically download attachments for incoming emails</string>
     <string name="attachment_summary_off">Only download attachments when manually requested</string>
     <string name="action_log_out">Log Out</string>
+
+    <string name="seller_info">Seller Information</string>
+    <string name="seller_colon">Seller:</string>
+    <string name="item_type_colon">Item Type:</string>
+    <string name="estimated_value">Estimated value:</string>
+    <string name="place_holder">Placeholder</string>
+    <string name="propose_trade">Propose Trade</string>
+    <string name="back_button">Return to Offer List</string>
+    <string name="btn_add_item">Add Item</string>
+
+    <string-array name="category_array">
+        <item>Books</item>
+        <item>Tutoring</item>
+        <item>Electronics</item>
+        <item>Fashion</item>
+        <item>Entertainment</item>
+        <item>Software</item>
+        <item>Office Products</item>
+        <item>Other</item>
+    </string-array>
 </resources>

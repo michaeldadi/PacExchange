@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="5dp"
     android:orientation="horizontal"
     android:layout_height="wrap_content"
     android:layout_width="match_parent">
+
+    <ImageView
+        android:id="@+id/item_image"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:src="@tools:sample/avatars" />
 
     <TextView
         android:layout_height="match_parent"

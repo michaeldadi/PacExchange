@@ -15,19 +15,21 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 public class UserProfileFragment extends Fragment {
 
-    ImageButton mSettingsDropDown;
-    TextView mName, mEmail, mGradYear, mPhoneNumber;
-    CircularImageView profileImage;
+    private ImageButton mSettingsDropDown;
+    private TextView mName, mEmail, mGradYear, mPhoneNumber, mReputation, mItemNumber, mSalesNumber;
+    private CircularImageView profileImage;
+    private MyInventoryRecyclerViewAdapter inventoryRecyclerViewAdapter;
 
-    FirebaseAuth mAuth;
-    FirebaseFirestore db;
-    StorageReference mStorageRef;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+    private StorageReference mStorageRef;
 
     public UserProfileFragment() {
 
@@ -45,6 +47,10 @@ public class UserProfileFragment extends Fragment {
         mGradYear = view.findViewById(R.id.user_grad_year);
         mPhoneNumber = view.findViewById(R.id.user_phone_number);
         profileImage = view.findViewById(R.id.imageview_account_profile);
+        mReputation = view.findViewById(R.id.reputation);
+        mItemNumber = view.findViewById(R.id.item_count);
+        mSalesNumber = view.findViewById(R.id.sales_count);
+        inventoryRecyclerViewAdapter = new MyInventoryRecyclerViewAdapter(getContext());
         //Initialize firebase vars
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -53,12 +59,13 @@ public class UserProfileFragment extends Fragment {
         //Set email and name in profile
         mEmail.setText(user.getEmail());
         mName.setText(user.getDisplayName());
+//        mItemNumber.setText(inventoryRecyclerViewAdapter.getItemCount());
         //Set path to write user profile image
         mStorageRef = mStorageRef.child("Images").child("profile pictures");
         //Assign user image to image view
         mStorageRef.child(user.getUid()).getDownloadUrl().addOnSuccessListener(uri -> Picasso.get().load(uri).into(profileImage));
         //Set user profile grad year and phone #
-        //TODO: Replace documentPath with generated doc name..
+
         DocumentReference docRef = db.collection("users").document(user.getUid());
         docRef.get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
@@ -66,6 +73,8 @@ public class UserProfileFragment extends Fragment {
 
                 mGradYear.setText(String.format(getString(R.string.grad_year), document.get("year")));
                 mPhoneNumber.setText(document.getString("phone"));
+                mReputation.setText(document.get("reputation").toString());
+                mSalesNumber.setText(document.get("sales").toString());
             }
         });
         return view;
@@ -73,6 +82,9 @@ public class UserProfileFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //Cache data locally
+        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder().setPersistenceEnabled(true).build();
+        db.setFirestoreSettings(settings);
 
         addButtonClickListeners();
     }

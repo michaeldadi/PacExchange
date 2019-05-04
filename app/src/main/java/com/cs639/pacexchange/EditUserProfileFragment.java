@@ -22,6 +22,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -30,6 +31,8 @@ import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -41,6 +44,7 @@ public class EditUserProfileFragment extends Fragment {
     EditText mName, mEmail, mGradYear, mPhoneNumber;
 
     StorageReference mStorageRef;
+    FirebaseStorage mFirebaseStorage;
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
@@ -66,6 +70,7 @@ public class EditUserProfileFragment extends Fragment {
         mAuth = FirebaseAuth.getInstance();
         mStorageRef = FirebaseStorage.getInstance().getReference();
         user = mAuth.getCurrentUser();
+        mFirebaseStorage = FirebaseStorage.getInstance();
         //Set display name and email values to UI
         mName.setText(user.getDisplayName());
         mEmail.setText(user.getEmail());
@@ -96,7 +101,7 @@ public class EditUserProfileFragment extends Fragment {
 
     private void addButtonClickListeners() {
         mSaveChanges.setOnClickListener(v -> {
-            user.updateEmail(mEmail.getText().toString());
+            updateUserInfo();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserProfileFragment()).commit();
 
         }); //Open popup menu on floating action button click with options for profile image
@@ -126,6 +131,8 @@ public class EditUserProfileFragment extends Fragment {
                         }
                         break;
                     case R.id.remove_photo:
+                        StorageReference photoRef = mFirebaseStorage.getReferenceFromUrl("gs://pacexchange-1527c.appspot.com/Images/profile pictures/" + user.getUid());
+                        photoRef.delete();
                         mProfilePicture.setImageResource(R.drawable.user_placeholder);
                         break;
                 }
@@ -141,6 +148,22 @@ public class EditUserProfileFragment extends Fragment {
         if (cameraIntent.resolveActivity(getActivity().getPackageManager()) != null) {
             startActivityForResult(cameraIntent, 1000);
         }
+    }
+
+    private void updateUserInfo() {
+        UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(mName.getText().toString()).build();
+        user.updateProfile(profileUpdates);
+
+        user.updateEmail(mEmail.getText().toString());
+
+        //Create firestore doc for user data
+        Map<String, Object> userUpdate = new HashMap<>();
+        //Save user fields to created doc
+        userUpdate.put("name", mName.getText().toString());
+        userUpdate.put("email", mEmail.getText().toString());
+        userUpdate.put("phone", mPhoneNumber.getText().toString());
+        userUpdate.put("year", Integer.parseInt(mGradYear.getText().toString()));
+        db.collection("users").document(user.getUid()).update(userUpdate);
     }
 
     @Override

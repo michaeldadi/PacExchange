@@ -1,13 +1,17 @@
 package com.cs639.pacexchange;
 
+import androidx.appcompat.widget.PopupMenu;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -27,6 +31,9 @@ public class MyInventoryRecyclerViewAdapter extends RecyclerView.Adapter<MyInven
             thumbnail = view.findViewById(R.id.thumbnail);
             overflow = view.findViewById(R.id.overflow);
         }
+    }
+    public MyInventoryRecyclerViewAdapter(Context mContext) {
+        this.mContext = mContext;
     }
 
 
@@ -58,37 +65,40 @@ public class MyInventoryRecyclerViewAdapter extends RecyclerView.Adapter<MyInven
     /**
      * Showing popup menu when tapping on 3 dots
      */
-//    private void showPopupMenu(View view) {
-//        // inflate menu
-//        PopupMenu popup = new PopupMenu(mContext, view);
-//        MenuInflater inflater = popup.getMenuInflater();
-//        inflater.inflate(R.menu.menu_album, popup.getMenu());
-//        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-//        popup.show();
-//    }
+    private void showPopupMenu(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(mContext, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_inventory_item, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.show();
+    }
 
     /**
      * Click listener for popup menu items
      */
-//    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
-//
-//        public MyMenuItemClickListener() {
-//        }
-//
-//        @Override
-//        public boolean onMenuItemClick(MenuItem menuItem) {
-//            switch (menuItem.getItemId()) {
-//                case R.id.action_add_favourite:
-//                    Toast.makeText(mContext, "Add to favourite", Toast.LENGTH_SHORT).show();
-//                    return true;
-//                case R.id.action_play_next:
-//                    Toast.makeText(mContext, "Play next", Toast.LENGTH_SHORT).show();
-//                    return true;
-//                default:
-//            }
-//            return false;
-//        }
-//    }
+    class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {
+
+        public MyMenuItemClickListener() {
+        }
+
+        @Override
+        public boolean onMenuItemClick(MenuItem menuItem) {
+            switch (menuItem.getItemId()) {
+                case R.id.action_delete:
+                    Toast.makeText(mContext, "Delete Item", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.action_edit:
+                    Toast.makeText(mContext, "Edit Item", Toast.LENGTH_SHORT).show();
+                    return true;
+                case R.id.action_share:
+                    Toast.makeText(mContext, "Share Item", Toast.LENGTH_SHORT).show();
+                    return true;
+                default:
+            }
+            return false;
+        }
+    }
 
     @Override
     public int getItemCount() {

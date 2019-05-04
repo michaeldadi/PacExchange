@@ -82,9 +82,10 @@
                             android:text="@string/items_label"
                             android:textSize="20sp" />
                         <TextView
+                            android:id="@+id/item_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="125"
+                            android:text="0"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:paddingTop="10dp"
@@ -104,9 +105,9 @@
                             android:textSize="20sp"
                             />
                         <TextView
+                            android:id="@+id/sales_count"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="1205"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:paddingTop="10dp"
@@ -126,9 +127,9 @@
                             android:text="@string/reputation_label"
                             android:textSize="20sp" />
                         <TextView
+                            android:id="@+id/reputation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="360"
                             android:textStyle="bold"
                             android:textSize="20sp"
                             android:paddingTop="10dp"

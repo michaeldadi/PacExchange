@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -37,6 +38,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         ViewHolder recyclerViewHolder = viewHolder;
 
         Item data = getItem(i);
+
         recyclerViewHolder.mSellerView.setText(data.getSeller());
         recyclerViewHolder.mItemTypeView.setText(data.getItemType());
         recyclerViewHolder.mPriceView.setText(data.getPrice() + "");
@@ -54,14 +56,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     }
     public class ViewHolder extends RecyclerView.ViewHolder
     {
-        public TextView mSellerView;
-        public TextView mItemTypeView;
-        public TextView mPriceView;
+        ImageView mItemImage;
+        TextView mSellerView, mItemTypeView, mPriceView;
 
         public ViewHolder(View itemView, View.OnClickListener rowClickListener)
         {
             super(itemView);
             this.itemView.setOnClickListener(rowClickListener);
+            mItemImage = itemView.findViewById(R.id.item_image);
             mSellerView = itemView.findViewById(R.id.seller_view);
             mItemTypeView = itemView.findViewById(R.id.item_type_view);
             mPriceView = itemView.findViewById(R.id.price_view);
