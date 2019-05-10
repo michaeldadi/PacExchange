@@ -94,6 +94,15 @@ public class InventoryFragment extends Fragment {
         return view;
     }
 
+    private void showPopupMenu(View view) {
+        // inflate menu
+        PopupMenu popup = new PopupMenu(getContext(), view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_inventory_item, popup.getMenu());
+        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
+        popup.show();
+    }
+
     private class InventoryViewHolder extends RecyclerView.ViewHolder {
         View view;
 
@@ -108,19 +117,12 @@ public class InventoryFragment extends Fragment {
         }
         void setCount(int productCount) {
             TextView count = view.findViewById(R.id.count);
+            count.setText(Integer.toString(productCount));
         }
         void setThumbnail(int imgRes) {
             ImageView thumbnail = view.findViewById(R.id.thumbnail);
+            thumbnail.setImageResource(imgRes);
         }
-    }
-
-    private void showPopupMenu(View view) {
-        // inflate menu
-        PopupMenu popup = new PopupMenu(getContext(), view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_inventory_item, popup.getMenu());
-        popup.setOnMenuItemClickListener(new MyMenuItemClickListener());
-        popup.show();
     }
 
     private class MyMenuItemClickListener implements PopupMenu.OnMenuItemClickListener {

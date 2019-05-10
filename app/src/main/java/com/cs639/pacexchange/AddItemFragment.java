@@ -60,8 +60,7 @@ public class AddItemFragment extends Fragment implements AdapterView.OnItemSelec
         return view;
     }
 
-    public void onItemSelected(AdapterView<?> parent, View view,
-                               int pos, long id) {
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         selectedCategory = parent.getItemAtPosition(pos).toString();
     }
 

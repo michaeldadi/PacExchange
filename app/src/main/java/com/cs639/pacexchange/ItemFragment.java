@@ -1,6 +1,7 @@
 package com.cs639.pacexchange;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -83,9 +84,7 @@ public class ItemFragment extends Fragment {
                 holder.setName(itemModel.getName());
                 holder.setDescription(itemModel.getDescription());
                 holder.setPrice(itemModel.getPrice());
-                holder.itemView.setOnClickListener(v -> {
-                    //onSellingRowClicked();
-                });
+                holder.itemView.setOnClickListener(v -> startActivity(new Intent(getContext(),ItemTradeDetailsActivity.class)));
             }
             @NonNull
             @Override

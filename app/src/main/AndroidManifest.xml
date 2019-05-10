@@ -46,6 +46,7 @@
             android:name=".ResetPasswordActivity"
             android:theme="@style/Theme.Design.NoActionBar" />
         <activity android:name=".MainActivity" />
+        <activity android:name=".ItemTradeDetailsActivity" />
     </application>
 
 </manifest>

@@ -71,7 +71,6 @@ public class SignupActivity extends AppCompatActivity {
             progressBar.setVisibility(View.VISIBLE);
             //create user
             auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-                Toast.makeText(this, "createUserWithEmail:onComplete:" + task.isSuccessful(), Toast.LENGTH_SHORT).show();
                 progressBar.setVisibility(View.GONE);
                 // If sign in fails, display a message to the user. If sign in succeeds
                 // the auth state listener will be notified and logic to handle the
@@ -93,13 +92,13 @@ public class SignupActivity extends AppCompatActivity {
                     users.put("year", Integer.parseInt(inputYear.getText().toString()));
                     users.put("reputation", 0);
                     users.put("sales", 0);
+                    users.put("items", 0);
                     db.collection("users").document(user.getUid()).set(users);
 
                     startActivity(new Intent(this, MainActivity.class));
                     finish();
                 }
             });
-
         });
     }
     @Override
