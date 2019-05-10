@@ -33,18 +33,10 @@ public class ItemTradeDetailsActivity extends AppCompatActivity {
     private void setButtonClickListeners()
     {
         Button backButton = findViewById(R.id.back_button);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        backButton.setOnClickListener(v -> finish());
         Button proposeTradeButton = findViewById(R.id.propose_trade_button);
-        proposeTradeButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        proposeTradeButton.setOnClickListener(v -> {
 
-            }
         });
 
     }

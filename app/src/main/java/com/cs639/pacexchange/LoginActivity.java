@@ -50,8 +50,7 @@ public class LoginActivity extends AppCompatActivity {
             //Show progressbar while authenticating user with server
             progressBar.setVisibility(View.VISIBLE);
             //Authenticate user
-            auth.signInWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(task -> {
+            auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
                         // If sign in fails, display a message to the user. If sign in succeeds
                         // the auth state listener will be notified and logic to handle the
                         // signed in user can be handled in the listener.

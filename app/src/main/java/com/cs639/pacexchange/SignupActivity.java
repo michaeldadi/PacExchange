@@ -3,6 +3,8 @@ package com.cs639.pacexchange;
 import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -45,6 +47,8 @@ public class SignupActivity extends AppCompatActivity {
         inputName = findViewById(R.id.name);
         inputPhone = findViewById(R.id.phone);
         inputYear = findViewById(R.id.grad);
+        //Format to phone number as user enters text
+        inputPhone.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
         //Finish activity on sign up
         btnSignIn.setOnClickListener(v -> finish());
         //Write user information to server and check if successful
@@ -79,6 +83,7 @@ public class SignupActivity extends AppCompatActivity {
                     //Set user display name and update profile
                     UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder().setDisplayName(inputName.getText().toString()).build();
                     user.updateProfile(profileUpdates);
+
                     //Create firestore doc for user data
                     Map<String, Object> users = new HashMap<>();
                     //Save user fields to created doc

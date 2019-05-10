@@ -8,42 +8,52 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class ItemFragment extends Fragment {
 
-    RecyclerView mRecyclerView;
-    Context mContext;
-    List<Item> mListData;
+    private RecyclerView mRecyclerView;
+    private Context mContext;
+    public FirestoreRecyclerAdapter<Item, ItemViewHolder> adapter;
+
+    public ItemFragment() {
+
+    }
 
     @Override
-    public void onAttach(Context context) {
+    public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         mContext = context;
     }
-    //Load stuff from database here
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        adapter.startListening();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        if (adapter != null) {
+            adapter.stopListening();
+        }
+    }
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mListData = new ArrayList<>();
-        mListData.add(new Item("John Doe", "tickets", 5));
-        mListData.add(new Item("Sebastian Dabrowski", "tutoring", 3));
-        mListData.add(new Item("Alexandra Stephens", "meal plan money", 2));
-        mListData.add(new Item("Jacob Oiler", "chair", 7));
-        mListData.add(new Item("Tinna Rider", "charger", 4));
-        mListData.add(new Item("Tim Fargoe", "pencils", 1));
-        mListData.add(new Item("Patryck Steward", "textbook", 5));
-        mListData.add(new Item("Anna White", "cupcakes", 2));
-        mListData.add(new Item("Jaden Williams", "tickets", 4));
-        mListData.add(new Item("Jaden Williams", "tickets", 4));
-        mListData.add(new Item("Jaden Williams", "tickets", 4));
-        mListData.add(new Item("Jaden Williams", "tickets", 4));
-
     }
 
     @Nullable
@@ -61,13 +71,55 @@ public class ItemFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        MyItemRecyclerViewAdapter adapter = new MyItemRecyclerViewAdapter(mContext, mListData, v -> onSellingRowClicked(v));
         mRecyclerView.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
+        //Set query, order items
+        Query query = FirebaseFirestore.getInstance().collection("items").orderBy("timestamp", Query.Direction.DESCENDING);
+        //Set firestore options var
+        FirestoreRecyclerOptions<Item> options = new FirestoreRecyclerOptions.Builder<Item>().setQuery(query, Item.class).build();
+        //Set adapter
+        adapter = new FirestoreRecyclerAdapter<Item, ItemViewHolder>(options) {
+            @Override
+            protected void onBindViewHolder(@NonNull ItemViewHolder holder, int position, @NonNull Item itemModel) {
+                holder.setName(itemModel.getName());
+                holder.setDescription(itemModel.getDescription());
+                holder.setPrice(itemModel.getPrice());
+                holder.itemView.setOnClickListener(v -> {
+                    //onSellingRowClicked();
+                });
+            }
+            @NonNull
+            @Override
+            public ItemViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_item, parent, false);
+                return new ItemViewHolder(view);
+            }
+        };
         mRecyclerView.setAdapter(adapter);
     }
 
-    private void onSellingRowClicked(View v)
-    {
+    private void onSellingRowClicked(View v) {
 
+    }
+
+    private class ItemViewHolder extends RecyclerView.ViewHolder {
+        View view;
+
+        ItemViewHolder(View itemView) {
+            super(itemView);
+            view = itemView;
+        }
+
+        void setName(String itemName) {
+            TextView textView = view.findViewById(R.id.item_name_view);
+            textView.setText(itemName);
+        }
+        void setDescription(String itemDescription) {
+            TextView textView = view.findViewById(R.id.item_description_view);
+            textView.setText(itemDescription);
+        }
+        void setPrice(float itemPrice) {
+            TextView textView = view.findViewById(R.id.item_price_view);
+            textView.setText(Float.toString(itemPrice));
+        }
     }
 }

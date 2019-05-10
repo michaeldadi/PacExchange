@@ -51,7 +51,7 @@
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/colorPrimary">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_change_name"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -67,7 +67,7 @@
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/colorPrimary">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_change_email"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -83,7 +83,7 @@
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/colorPrimary">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_change_phone_number"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -99,7 +99,7 @@
                         android:layout_height="wrap_content"
                         android:textColorHint="@color/colorPrimary">
 
-                        <EditText
+                        <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_change_grad_year"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"

@@ -11,6 +11,8 @@ import androidx.annotation.Nullable;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.Fragment;
+
+import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.View;
@@ -48,6 +50,7 @@ public class EditUserProfileFragment extends Fragment {
     FirebaseAuth mAuth;
     FirebaseUser user;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    //CollectionReference ref = db.collection("users").document(user.getUid()).collection("t");
 
     public EditUserProfileFragment() {
         //Required empty public constructor
@@ -74,6 +77,7 @@ public class EditUserProfileFragment extends Fragment {
         //Set display name and email values to UI
         mName.setText(user.getDisplayName());
         mEmail.setText(user.getEmail());
+
         //Set path to write user profile image
         mStorageRef = mStorageRef.child("Images").child("profile pictures");
 
@@ -100,6 +104,8 @@ public class EditUserProfileFragment extends Fragment {
     }
 
     private void addButtonClickListeners() {
+        mPhoneNumber.addTextChangedListener(new PhoneNumberFormattingTextWatcher());
+
         mSaveChanges.setOnClickListener(v -> {
             updateUserInfo();
             getFragmentManager().beginTransaction().replace(R.id.fragment_container, new UserProfileFragment()).commit();

@@ -1,23 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/lbl_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Item Category: "
+        android:layout_margin="16dp"/>
 
     <Spinner
         android:id="@+id/category_spinner"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/lbl_category"
+        android:layout_alignBottom="@+id/lbl_category"/>
+
+    <TextView
+        android:id="@+id/lbl_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name: "
+        android:layout_below="@+id/lbl_category"
+        android:layout_margin="16dp"
+        android:layout_alignEnd="@+id/lbl_item_description" />
 
     <EditText
+        android:id="@+id/edit_item_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/lbl_item_name"
+        android:layout_alignBaseline="@+id/lbl_item_name" />
+
+    <TextView
+        android:id="@+id/lbl_item_description"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Description: "
+        android:layout_below="@+id/lbl_item_name"
+        android:layout_margin="16dp"/>
 
     <EditText
+        android:id="@+id/edit_item_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/lbl_item_description"
+        android:layout_alignBaseline="@+id/lbl_item_description" />
+
+    <TextView
+        android:id="@+id/lbl_item_price"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:text="Price: "
+        android:layout_alignEnd="@+id/lbl_item_description"
+        android:layout_below="@+id/lbl_item_description"
+        android:layout_margin="16dp"/>
 
     <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:id="@+id/edit_item_price"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/lbl_item_price"
+        android:inputType="numberDecimal"
+        android:layout_alignBaseline="@+id/lbl_item_price"/>
 
-</LinearLayout>
+    <TextView
+        android:id="@+id/lbl_upload_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image: "
+        android:layout_below="@+id/lbl_item_price"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/btn_upload_item_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@+id/lbl_upload_image"
+        android:layout_alignBaseline="@+id/lbl_upload_image"
+        android:text="Upload"/>
+
+    <Button
+        android:id="@+id/btn_add_item"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Add Item"
+        android:layout_centerInParent="true"/>
+
+</RelativeLayout>

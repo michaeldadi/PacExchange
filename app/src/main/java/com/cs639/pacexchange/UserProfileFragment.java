@@ -4,6 +4,8 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,7 +17,6 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.squareup.picasso.Picasso;
@@ -25,7 +26,7 @@ public class UserProfileFragment extends Fragment {
     private ImageButton mSettingsDropDown;
     private TextView mName, mEmail, mGradYear, mPhoneNumber, mReputation, mItemNumber, mSalesNumber;
     private CircularImageView profileImage;
-    private MyInventoryRecyclerViewAdapter inventoryRecyclerViewAdapter;
+    //private ItemFragment itemFragment;
 
     private FirebaseAuth mAuth;
     private FirebaseFirestore db;
@@ -50,7 +51,6 @@ public class UserProfileFragment extends Fragment {
         mReputation = view.findViewById(R.id.reputation);
         mItemNumber = view.findViewById(R.id.item_count);
         mSalesNumber = view.findViewById(R.id.sales_count);
-        inventoryRecyclerViewAdapter = new MyInventoryRecyclerViewAdapter(getContext());
         //Initialize firebase vars
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser user = mAuth.getCurrentUser();
@@ -58,8 +58,11 @@ public class UserProfileFragment extends Fragment {
         mStorageRef = FirebaseStorage.getInstance().getReference();
         //Set email and name in profile
         mEmail.setText(user.getEmail());
+        Linkify.addLinks(mEmail, Linkify.ALL);
         mName.setText(user.getDisplayName());
-//        mItemNumber.setText(inventoryRecyclerViewAdapter.getItemCount());
+        //TODO: Fix below
+//        itemFragment = new ItemFragment();
+//        mItemNumber.setText(itemFragment.adapter.getItemCount());
         //Set path to write user profile image
         mStorageRef = mStorageRef.child("Images").child("profile pictures");
         //Assign user image to image view
@@ -75,6 +78,8 @@ public class UserProfileFragment extends Fragment {
                 mPhoneNumber.setText(document.getString("phone"));
                 mReputation.setText(document.get("reputation").toString());
                 mSalesNumber.setText(document.get("sales").toString());
+
+                Linkify.addLinks(mPhoneNumber, Linkify.ALL);
             }
         });
         return view;
@@ -82,9 +87,6 @@ public class UserProfileFragment extends Fragment {
 
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        //Cache data locally
-        FirebaseFirestoreSettings settings = new FirebaseFirestoreSettings.Builder().setPersistenceEnabled(true).build();
-        db.setFirestoreSettings(settings);
 
         addButtonClickListeners();
     }

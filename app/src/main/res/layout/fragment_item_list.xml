@@ -2,7 +2,6 @@
 
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    android:weightSum="10"
     android:layout_height="match_parent"
     android:layout_width="match_parent">
 
@@ -18,8 +17,7 @@
     android:id="@+id/item_list"
     android:name="com.cs639.pacexchange.ItemFragment"
     android:layout_width="match_parent"
-    android:layout_height="0dp"
-    android:layout_weight="9"
+    android:layout_height="match_parent"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     tools:context=".ItemFragment"

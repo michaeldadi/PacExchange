@@ -4,7 +4,6 @@ import android.content.Intent;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestoreSettings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
