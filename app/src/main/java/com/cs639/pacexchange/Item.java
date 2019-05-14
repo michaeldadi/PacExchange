@@ -5,24 +5,23 @@ import com.google.firebase.firestore.ServerTimestamp;
 import java.util.Date;
 
 public class Item {
-    float mPrice;
-    String mName, mDescription, mCategory, mUid;
+    String mName, mDescription, mCategory, mUid, mPrice;
     Date mTimestamp;
 
     public Item() {}
 
-    public Item(String name, String description, String uid, int price) {
+    public Item(String name, String description, String uid, String price) {
         mName = name;
         mDescription = description;
         mUid = uid;
         mPrice = price;
     }
 
-    public float getPrice() {
+    public String getPrice() {
         return mPrice;
     }
 
-    public void setPrice(float mPrice) {
+    public void setPrice(String mPrice) {
         this.mPrice = mPrice;
     }
 

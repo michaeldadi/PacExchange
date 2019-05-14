@@ -25,10 +25,9 @@ public class ItemTradeDetailsActivity extends AppCompatActivity {
         TextView sellerNameTextView = findViewById(R.id.seller_name);
         TextView itemTypeTextView = findViewById(R.id.item_type_name);
         TextView estimatedValueTextView = findViewById(R.id.estimated_value);
-        sellerNameTextView.setText(startingIntent.getStringExtra("SELLER_NAME"));
-        itemTypeTextView.setText(startingIntent.getStringExtra("SELLER_ITEM"));
-        int sellerItemValue = startingIntent.getIntExtra("SELLER_ITEM_VALUE", 0);
-        estimatedValueTextView.setText(sellerItemValue + "");
+        sellerNameTextView.setText(startingIntent.getStringExtra("name"));
+        itemTypeTextView.setText(startingIntent.getStringExtra("category"));
+        estimatedValueTextView.setText(startingIntent.getStringExtra("cost"));
     }
     private void setButtonClickListeners()
     {

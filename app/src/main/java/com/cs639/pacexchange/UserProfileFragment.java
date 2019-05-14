@@ -33,7 +33,6 @@ public class UserProfileFragment extends Fragment {
     private StorageReference mStorageRef;
 
     public UserProfileFragment() {
-
     }
 
     @SuppressLint("StringFormatMatches")
@@ -60,9 +59,6 @@ public class UserProfileFragment extends Fragment {
         mEmail.setText(user.getEmail());
         Linkify.addLinks(mEmail, Linkify.ALL);
         mName.setText(user.getDisplayName());
-        //TODO: Fix below
-//        itemFragment = new ItemFragment();
-//        mItemNumber.setText(itemFragment.adapter.getItemCount());
         //Set path to write user profile image
         mStorageRef = mStorageRef.child("Images").child("profile pictures");
         //Assign user image to image view
@@ -78,6 +74,7 @@ public class UserProfileFragment extends Fragment {
                 mPhoneNumber.setText(document.getString("phone"));
                 mReputation.setText(document.get("reputation").toString());
                 mSalesNumber.setText(document.get("sales").toString());
+                mItemNumber.setText(document.get("items").toString());
 
                 Linkify.addLinks(mPhoneNumber, Linkify.ALL);
             }

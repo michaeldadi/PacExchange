@@ -1,5 +1,6 @@
 package com.cs639.pacexchange;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -22,13 +23,19 @@ import android.widget.Toast;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class InventoryFragment extends Fragment {
 
     private Button btnAddItem;
     private FirestoreRecyclerAdapter<Item, InventoryViewHolder> adapter;
+    private String selectedItem;
 
     public InventoryFragment() {
     }
@@ -64,7 +71,7 @@ public class InventoryFragment extends Fragment {
         RecyclerView recyclerView = view.findViewById(R.id.inventory_list);
         recyclerView.setLayoutManager(new GridLayoutManager(getContext(), 2));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-
+        //Query db to find docs matching current user and order by time added
         Query query = FirebaseFirestore.getInstance().collection("items")
                 .whereEqualTo("userId", FirebaseAuth.getInstance().getCurrentUser().getUid())
                 .orderBy("timestamp", Query.Direction.DESCENDING);
@@ -77,9 +84,12 @@ public class InventoryFragment extends Fragment {
                 holder.setTitle(inventory.getName());
                 //TODO: Fix 2 lines below to be responsive
                 holder.setCount(1);
-                holder.setThumbnail(R.drawable.books);
-                holder.itemView.setOnClickListener(v -> {
-
+                holder.setThumbnail(R.drawable.electronics);
+                holder.itemView.setOnClickListener(v -> startActivity(new Intent(getContext(), InventoryItemActivity.class)));
+                holder.overflow.setOnClickListener(v -> {
+                    DocumentSnapshot document = getSnapshots().getSnapshot(position);
+                    selectedItem = document.getId();
+                    showPopupMenu(v);
                 });
             }
             @NonNull
@@ -105,11 +115,12 @@ public class InventoryFragment extends Fragment {
 
     private class InventoryViewHolder extends RecyclerView.ViewHolder {
         View view;
+        ImageView overflow;
 
         InventoryViewHolder(View itemView) {
             super(itemView);
             view = itemView;
-            ImageView overflow = view.findViewById(R.id.overflow);
+            overflow = view.findViewById(R.id.overflow);
         }
         void setTitle(String productTitle) {
             TextView title = view.findViewById(R.id.title);
@@ -134,7 +145,10 @@ public class InventoryFragment extends Fragment {
         public boolean onMenuItemClick(MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.action_delete:
-                    Toast.makeText(getContext(), "Delete Item", Toast.LENGTH_SHORT).show();
+                    FirebaseFirestore.getInstance().collection("items").document(selectedItem).delete();
+                    Map<String, Object> userItemsUpdate = new HashMap<>();
+                    userItemsUpdate.put("items", FieldValue.increment(-1));
+                    FirebaseFirestore.getInstance().collection("users").document(FirebaseAuth.getInstance().getCurrentUser().getUid()).update(userItemsUpdate);
                     return true;
                 case R.id.action_edit:
                     Toast.makeText(getContext(), "Edit Item", Toast.LENGTH_SHORT).show();

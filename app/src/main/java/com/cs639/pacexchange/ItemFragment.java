@@ -18,8 +18,11 @@ import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
+import com.squareup.picasso.Picasso;
 
 public class ItemFragment extends Fragment {
 
@@ -84,7 +87,17 @@ public class ItemFragment extends Fragment {
                 holder.setName(itemModel.getName());
                 holder.setDescription(itemModel.getDescription());
                 holder.setPrice(itemModel.getPrice());
-                holder.itemView.setOnClickListener(v -> startActivity(new Intent(getContext(),ItemTradeDetailsActivity.class)));
+
+                DocumentSnapshot document = getSnapshots().getSnapshot(position);
+                holder.setIcon(document.getId());
+
+                holder.itemView.setOnClickListener(v -> {
+                    Intent intent = new Intent(getContext(),ItemTradeDetailsActivity.class);
+                    intent.putExtra("name", itemModel.getUserId());
+                    intent.putExtra("category", itemModel.getCategory());
+                    intent.putExtra("cost", itemModel.getPrice());
+                    startActivity(intent);
+                });
             }
             @NonNull
             @Override
@@ -94,10 +107,6 @@ public class ItemFragment extends Fragment {
             }
         };
         mRecyclerView.setAdapter(adapter);
-    }
-
-    private void onSellingRowClicked(View v) {
-
     }
 
     private class ItemViewHolder extends RecyclerView.ViewHolder {
@@ -116,9 +125,15 @@ public class ItemFragment extends Fragment {
             TextView textView = view.findViewById(R.id.item_description_view);
             textView.setText(itemDescription);
         }
-        void setPrice(float itemPrice) {
+        void setPrice(String itemPrice) {
             TextView textView = view.findViewById(R.id.item_price_view);
-            textView.setText(Float.toString(itemPrice));
+            textView.setText(itemPrice);
+        }
+
+        void setIcon(String docId) {
+            ImageView imageView = view.findViewById(R.id.item_image);
+            FirebaseStorage.getInstance().getReference().child("Images").child("items").child(docId).getDownloadUrl()
+                    .addOnSuccessListener(uri -> Picasso.get().load(uri).into(imageView));
         }
     }
 }
