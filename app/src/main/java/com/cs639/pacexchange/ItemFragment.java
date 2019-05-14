@@ -87,7 +87,7 @@ public class ItemFragment extends Fragment {
                 holder.setName(itemModel.getName());
                 holder.setDescription(itemModel.getDescription());
                 holder.setPrice(itemModel.getPrice());
-
+                //Get document ID
                 DocumentSnapshot document = getSnapshots().getSnapshot(position);
                 holder.setIcon(document.getId());
 

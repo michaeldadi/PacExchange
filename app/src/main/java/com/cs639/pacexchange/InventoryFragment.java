@@ -27,6 +27,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.storage.FirebaseStorage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -84,13 +85,19 @@ public class InventoryFragment extends Fragment {
                 holder.setTitle(inventory.getName());
                 //TODO: Fix 2 lines below to be responsive
                 holder.setCount(1);
-                holder.setThumbnail(R.drawable.electronics);
+                holder.setThumbnail(R.drawable.office);
                 holder.itemView.setOnClickListener(v -> startActivity(new Intent(getContext(), InventoryItemActivity.class)));
                 holder.overflow.setOnClickListener(v -> {
+                    //Get document ID
                     DocumentSnapshot document = getSnapshots().getSnapshot(position);
                     selectedItem = document.getId();
                     showPopupMenu(v);
                 });
+                for (int i = 0; i < adapter.getItemCount(); i++) {
+                    String docId = getSnapshots().getSnapshot(position).getId();
+                    FirebaseStorage.getInstance().getReference().child("Images").child("items").child(docId).getDownloadUrl().addOnFailureListener(task -> {
+                    });
+                }
             }
             @NonNull
             @Override

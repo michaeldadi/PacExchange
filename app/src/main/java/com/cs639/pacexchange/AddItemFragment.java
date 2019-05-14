@@ -53,6 +53,7 @@ public class AddItemFragment extends Fragment implements AdapterView.OnItemSelec
 
     public AddItemFragment() {
     }
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -171,7 +172,7 @@ public class AddItemFragment extends Fragment implements AdapterView.OnItemSelec
                 Uri returnUri = data.getData();
                 //Firebase storage for uploaded image
                 StorageReference filePath = mStorageRef.child(docKey);
-                filePath.putFile(returnUri).addOnFailureListener(e -> Toast.makeText(getContext(),"Upload Failed",Toast.LENGTH_LONG).show());
+                filePath.putFile(returnUri).addOnFailureListener(e -> Toast.makeText(getContext(),"Upload Failed: " + e, Toast.LENGTH_LONG).show());
 
                 Bitmap bitmapImage = null;
                 try {

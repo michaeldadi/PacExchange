@@ -48,6 +48,7 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ItemTradeDetailsActivity" />
         <activity android:name=".InventoryItemActivity" />
+        <activity android:name=".ChatActivity"/>
     </application>
 
 </manifest>
