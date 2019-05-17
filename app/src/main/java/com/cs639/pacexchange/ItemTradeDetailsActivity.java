@@ -34,8 +34,13 @@ public class ItemTradeDetailsActivity extends AppCompatActivity {
         Button backButton = findViewById(R.id.back_button);
         backButton.setOnClickListener(v -> finish());
         Button proposeTradeButton = findViewById(R.id.propose_trade_button);
-        proposeTradeButton.setOnClickListener(v -> {
+        proposeTradeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ItemTradeDetailsActivity.this, ChatActivity.class);
+                startActivity(intent);
 
+            }
         });
 
     }
